@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <md-dialog flex="75" id="modal-popup">
+    <form name="viewConfig" class="viewConfig" novalidate>
+      <modal-header modal-title="{{ popUptitle }}" modal-close-icon="true" modal-close-handler="cancel"></modal-header>
+      <div class="modal-body" role="tabpanel">
+  
+        <div class="headerTabHeight topAppTab" ng-if="isCEdge">
+          <div class="headerTab" id="{{stateString}}tab_section">
+            <button ng-repeat="tab in tabs" ng-class="{ activeTabButton: tab.active}" class="tabButton"
+                    ng-click="updateActiveTab(tabs, $index)" id="{{stateString}}modal_tab_{{$index}}">
+              {{tab.title}}
+            </button>
+          </div>
+        </div>
+  
+        <div id="{{stateString}}modal_tab_content_0" data-ng-hide="!tabs[0].active">
+          <vip-text-area text-area-name="configuration" text-required="false" ng-model="configuration"
+                         text-area-disabled="true" text-area-class="large"></vip-text-area>
+        </div>
+  
+        <div id="{{stateString}}modal_tab_content_1" data-ng-hide="!tabs[1].active" ng-if="isCEdge">
+          <vip-text-area text-area-name="configuration" text-required="false" ng-model="rfsConfiguration"
+                         text-area-disabled="true" text-area-class="large"></vip-text-area>
+        </div>
+  
+  
+        <vip-spinner style="width: 97%" ng-show="serverCall"></vip-spinner>
+        <vip-modal-error ng-show="showErrorSection" message="errorMessage" id="{{ stateString }}config"></vip-modal-error>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <vip-button button-type="button" button-title="Close" button-size="small" button-color="white" ng-click="cancel()"
+                  class="buttonMargin"></vip-button>
+      <!--<vip-button button-type="button" button-title="Add" button-size="small" button-color="blue" ng-click="add()" class="buttonMargin"></vip-button>-->
+    </div>
+  </md-dialog>
+      
+</body>
+</html>
+
